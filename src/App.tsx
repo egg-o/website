@@ -162,9 +162,9 @@ function Home() {
   )
 }
 
-function PageIntro({ index, label, title, description }: { index: string; label: string; title: string; description: string }) {
-  return <div className="page-intro shell"><span className="tiny-label">{index} / {label}</span><h1>{title}<span className="period">.</span></h1><p>{description}</p></div>
-}
+// function PageIntro({ index, label, title, description }: { index: string; label: string; title: string; description: string }) {
+//   return <div className="page-intro shell"><span className="tiny-label">{index} / {label}</span><h1>{title}<span className="period">.</span></h1><p>{description}</p></div>
+// }
 
 function Work() {
   return (
@@ -244,6 +244,7 @@ function Projects() {
     <div className="detail-content shell"><section className="project-entry"><div className="project-entry-image"><img src={assets.eden} alt="Eden Project game environment" /><img src={assets.edenDetail} alt="Another scene from the Eden Project" loading="lazy" /></div><div className="project-entry-info"><span className="tiny-label">01 / UNITY · C#</span><h2>Eden Project</h2><p>A light horror interactive narrative made in collaboration with Allison Zheng. I handled all scripting, built a custom framework for dialogue and actions from text files, and integrated art assets.</p><a className="inline-link" href="https://rowlets.itch.io/eden-project-wip" target="_blank" rel="noreferrer">View project <Arrow /></a></div></section><section className="project-entry project-entry-alt"><div className="project-entry-image single-image"><img src={assets.cyberpunk} alt="Cyberpunk 2077 in-game character screenshot from a modding project" loading="lazy" /></div><div className="project-entry-info"><span className="tiny-label">02 / MODDING · WOLVENKIT</span><h2>Cyberpunk 2077 Modding</h2><p>A playful experiment in game modding: custom player tattoos and a very specific new soundtrack for the in-game radio.</p><span className="project-note">Personal experiment · WolvenKit</span></div></section><section className="detail-section rigging-section"><div className="detail-aside"><span className="tiny-label">03 / RIGGING</span><span>MAYA · UE4</span></div><div className="detail-body"><h2>Orc Rig</h2><p>Rigged and imported an orc character into Unreal Engine 4 as an independent character rigging study.</p><Video id="Tl8ELiFamaE" title="Orc Rig Reel" /></div></section><div className="next-page"><span className="tiny-label">NEXT UP</span><Link to="/about">A little about me <Arrow /></Link></div></div></main>
 }
 
+// needs a picture of Kaya, needs a picture of me, and a kaya page
 function About() {
   return (
     <main id="main">
