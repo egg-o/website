@@ -2,21 +2,39 @@ import { useEffect, useState } from 'react'
 import { HashRouter, Link, NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import './App.css'
 
+const files = import.meta.glob('./assets/icons/*.{png,svg,webp,jpg,jpeg}', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>
+
+const icons = Object.fromEntries(
+  Object.entries(files).map(([path, url]) => [
+    path.split('/').pop()!.replace(/\.\w+$/, ''), // "havok.png" -> "havok"
+    url,
+  ])
+)
+
 const cdn = 'https://images.squarespace-cdn.com/content/v1/64f6359e849597597913ff6f/'
 const assets = {
-  couch: `${cdn}411bdc8f-3781-4a29-86c5-ff0b42ef443f/couch.jpg?format=1000w`,
+  couch: icons.couch,
   eden: `${cdn}7d4db476-0f19-4991-a090-9ae732cecd06/Screenshot+2024-04-29+091904.png?format=1000w`,
   edenDetail: `${cdn}267d1687-74f5-44c2-8c22-8a6da5611f32/edenSS.PNG?format=1000w`,
   cyberpunk: `${cdn}6b9d4e16-024d-4682-8414-1bfc8f673710/photomode_30122023_162637.png?format=1000w`,
-  maya: `${cdn}04789941-1254-414f-9b34-cb2388f8a0ab/maya-icon.png?format=500w`,
-  houdini: `${cdn}64ca39c1-4bae-4245-a5e4-2c3e440c83f1/houdini-icon.png?format=500w`,
-  substance: `${cdn}298808ee-1662-4839-b9de-fecb2258020c/sub-painter-icon.png?format=500w`,
-  zbrush: `${cdn}ea053f34-c52c-4903-86fe-265e014291ff/zbrush_icon-icons.com_50712.png?format=500w`,
-  marmoset: `${cdn}c540cc6b-c3be-4c70-aff8-613202bf8f95/marmoset_logos.webp?format=500w`,
-  havok: `${cdn}4f89b1d3-586d-4241-b4d1-637babef901c/cropped-havok_logo_site.png?format=500w`,
+  maya: icons.maya,
+  houdini: icons.houdini,
+  zbrush: icons.zbrush,
+  marmoset: icons.marmoset,
+  havok: icons.havok,
+  painter: icons.painter,
+  designer: icons.designer,
+  jali: icons.jali,
+  shotgrid: icons.shotgrid,
+  usd: icons.usd,
 }
 const resumeUrl = 'https://www.sharonzhong.com/s/2025-Tech-Art-Resume-Sharon-Zhong.pdf'
 const copyrightYear = new Date().getFullYear()
+
+import brandMark from './assets/icons/brand.webp'
 
 function Arrow() {
   return <span aria-hidden="true" className="arrow">↗</span>
@@ -39,7 +57,7 @@ function Header() {
   return (
     <header className="site-header shell">
       <Link to="/" className="brand" aria-label="Sharon Zhong, home">
-        <span className="brand-mark" aria-hidden="true">sz.</span>
+        <img className="brand-mark" src={brandMark} alt="" />
         <span className="brand-name">Sharon Zhong</span>
       </Link>
       <nav className="main-nav" aria-label="Main navigation">
@@ -48,7 +66,7 @@ function Header() {
         <NavLink to="/projects">Projects</NavLink>
         <NavLink to="/about">About</NavLink>
       </nav>
-      <Link to="/cart" className="cart-link">Cart <span aria-hidden="true">(0)</span></Link>
+      {/* <Link to="/cart" className="cart-link">Cart <span aria-hidden="true">(0)</span></Link> */}
     </header>
   )
 }
@@ -57,7 +75,7 @@ function Footer() {
   return (
     <footer className="site-footer shell">
       <div className="footer-top">
-        <p>Have something in mind?<br /><a href="mailto:zhongxsharon@gmail.com">Let’s talk <Arrow /></a></p>
+        <p><a href="mailto:zhongxsharon@gmail.com">:email emoji:<Arrow /></a></p>
         <div className="footer-links">
           <a href="https://www.linkedin.com/in/sharonxzhong/" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a>
           <a href="mailto:zhongxsharon@gmail.com">Email <Arrow /></a>
@@ -95,7 +113,11 @@ function Video({ id, title, className = '' }: { id: string; title: string; class
 const programs = [
   { name: 'Maya', image: assets.maya },
   { name: 'Houdini', image: assets.houdini },
-  { name: 'Substance Painter', image: assets.substance },
+  { name: 'Substance Painter', image: assets.painter },
+  { name: 'Substance Desiger', image: assets.designer },
+  { name: 'Jali', image: assets.jali },
+  { name: 'Flow / Shotgrid', image: assets.shotgrid },
+  { name: 'USD', image: assets.usd },
   { name: 'ZBrush', image: assets.zbrush },
   { name: 'Marmoset', image: assets.marmoset },
   { name: 'Havok', image: assets.havok },
@@ -104,34 +126,38 @@ const programs = [
 function Home() {
   return (
     <main id="main">
-      <section className="intro shell">
+      {/* <section className="intro shell">
         <div className="eyebrow"><span className="eyebrow-line" /> PORTFOLIO / 2026</div>
         <div className="intro-grid">
           <h1>Crafting the space<br />between <em>art</em> &amp; <em>code.</em></h1>
           <div className="intro-side"><span className="tiny-label">HELLO, I'M SHARON.</span><p>Pipeline &amp; character tech artist making thoughtful tools and bringing digital worlds to life.</p><span className="intro-scroll">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></span></div>
         </div>
-      </section>
+      </section> */}
 
       <section className="reel-section shell" aria-labelledby="reel-heading">
         <div className="section-kicker"><span>01 / FEATURED REEL</span><span>CHARACTER TECH ART</span></div>
         <Video id="kVJcHH7XdpI" title="Sharon Zhong 2024 Spiritborn Tech Art Reel" className="hero-video" />
-        <div className="reel-info"><div><h2 id="reel-heading">2024 Character Tech Art Reel</h2><p>Diablo IV · Vessel of Hatred</p></div><p className="reel-description">Spiritborn hero armor sets — skinning, cloth simulation, and bringing every detail to life in-engine.</p><a href="https://www.youtube.com/watch?v=kVJcHH7XdpI" target="_blank" rel="noreferrer" className="inline-link">Watch on YouTube <Arrow /></a></div>
+        <div className="reel-info"><div><h2 id="reel-heading">2024 Character Tech Art Reel</h2><p>Diablo IV · Vessel of Hatred</p></div><p className="reel-description">Spiritborn hero armor sets — skinning, cloth simulation, and implementing assets in-engine.</p><a href="https://www.youtube.com/watch?v=kVJcHH7XdpI" target="_blank" rel="noreferrer" className="inline-link">Watch on YouTube <Arrow /></a></div>
         <div className="quick-actions" aria-label="Explore portfolio"><Link to="/tech-art" className="pill-button">Professional Work <Arrow /></Link><Link to="/projects" className="outline-button">Personal Projects <Arrow /></Link><a href={resumeUrl} target="_blank" rel="noreferrer" className="outline-button">View Résumé <Arrow /></a></div>
       </section>
-
+{/* 
       <section className="selected-section shell" aria-labelledby="selected-heading">
-        <div className="section-heading"><div><span className="tiny-label">A LITTLE OF WHAT I DO</span><h2 id="selected-heading">Selected work<span className="period">.</span></h2></div><Link to="/tech-art" className="inline-link">Explore all work <Arrow /></Link></div>
+        <div className="section-heading"><div><h2 id="selected-heading">Selected work<span className="period">.</span></h2></div><Link to="/tech-art" className="inline-link">Explore all work <Arrow /></Link></div>
         <div className="preview-grid">
-          <Link to="/tech-art" className="preview-card"><div className="preview-image preview-professional"><img src="https://i.ytimg.com/vi/kVJcHH7XdpI/maxresdefault.jpg" alt="Characters from the Diablo IV Spiritborn tech art reel" loading="lazy" /><span className="image-corner">01</span></div><div className="preview-meta"><div><span>PROFESSIONAL WORK / 2024</span><h3>Character tech art at Blizzard</h3></div><Arrow /></div></Link>
+          <Link to="/tech-art" className="preview-card"><div className="preview-image preview-professional"><img src="https://i.ytimg.com/vi/kVJcHH7XdpI/maxresdefault.jpg" alt="Characters from the Diablo IV Spiritborn tech art reel" loading="lazy" /><span className="image-corner">01</span></div><div className="preview-meta"><div><span>PROFESSIONAL WORK / 2024</span><h3>Character Tech Artist at Blizzard</h3></div><Arrow /></div></Link>
           <Link to="/projects" className="preview-card"><div className="preview-image"><img src={assets.eden} alt="Scene from the Eden Project interactive narrative" loading="lazy" /><span className="image-corner">02</span></div><div className="preview-meta"><div><span>PERSONAL PROJECTS / UNITY</span><h3>Eden Project</h3></div><Arrow /></div></Link>
         </div>
+      </section> */}
+
+      <section className="tools-section shell" aria-labelledby="tools-heading"><div className="tools-intro"><span className="tiny-label">EXPERIENCE</span><h2 id="tools-heading">Programs &amp; Technologies<br /> Worked With</h2><p>Tools I've interacted with in the industry and for personal projects</p></div>
+        <div className="tool-list">{programs.map((program) => <div className="tool-item" key={program.name}><img src={program.image} alt="" loading="lazy" /><span>{program.name}</span></div>)}
+        <div className="tool-item tool-text"><span className="tool-monogram">Py</span><span>Python</span></div>
+        <div className="tool-item tool-text"><span className="tool-monogram">C#</span><span>Unity / C#</span></div></div>
       </section>
 
-      <section className="tools-section shell" aria-labelledby="tools-heading"><div className="tools-intro"><span className="tiny-label">THE TOOLKIT</span><h2 id="tools-heading">Programs &amp; technologies<br />worked with<span className="period">.</span></h2><p>A mix of tools for building better workflows and bringing creative ideas to life.</p></div><div className="tool-list">{programs.map((program) => <div className="tool-item" key={program.name}><img src={program.image} alt="" loading="lazy" /><span>{program.name}</span></div>)}<div className="tool-item tool-text"><span className="tool-monogram">Py</span><span>Python</span></div><div className="tool-item tool-text"><span className="tool-monogram">C#</span><span>Unity / C#</span></div></div></section>
+      <section className="explore-section shell" aria-labelledby="explore-heading"><div className="section-heading"></div><div className="explore-links"><Link to="/tech-art"><span className="explore-number">01</span><span>Professional Work</span><Arrow /></Link><Link to="/projects"><span className="explore-number">02</span><span>Personal Projects</span><Arrow /></Link><a href={resumeUrl} target="_blank" rel="noreferrer"><span className="explore-number">03</span><span>View Résumé</span><Arrow /></a></div></section>
 
-      <section className="explore-section shell" aria-labelledby="explore-heading"><div className="section-heading"><div><span className="tiny-label">WHERE TO NEXT?</span><h2 id="explore-heading">Keep exploring<span className="period">.</span></h2></div></div><div className="explore-links"><Link to="/tech-art"><span className="explore-number">01</span><span>Professional Work</span><Arrow /></Link><Link to="/projects"><span className="explore-number">02</span><span>Personal Projects</span><Arrow /></Link><a href={resumeUrl} target="_blank" rel="noreferrer"><span className="explore-number">03</span><span>View Résumé</span><Arrow /></a></div></section>
-
-      <section className="couch-section shell"><div><span className="tiny-label">ONE MORE THING</span><p>Not everything has to be<br />so serious.</p><Link to="/secret-3" className="inline-link">Please, take a seat <Arrow /></Link></div><Link to="/secret-3" className="couch-image" aria-label="Find the hidden couch page"><img src={assets.couch} alt="An inviting couch — click to discover a little secret" loading="lazy" /></Link></section>
+      {/* <section className="couch-section shell"><div><span className="tiny-label">ONE MORE THING</span><p>Not everything has to be<br />so serious.</p><Link to="/secret-3" className="inline-link">Please, take a seat <Arrow /></Link></div><Link to="/secret-3" className="couch-image" aria-label="Find the hidden couch page"><img src={assets.couch} alt="An inviting couch — click to discover a little secret" loading="lazy" /></Link></section> */}
     </main>
   )
 }
@@ -153,7 +179,7 @@ function About() {
 }
 
 function Secret() {
-  return <main id="main" className="secret-page"><div className="secret-content shell"><span className="tiny-label">YOU FOUND A LITTLE CORNER OF THE INTERNET</span><h1>Welcome to the<br /><em>Couch Zone.</em></h1><div className="secret-photo"><img src={assets.couch} alt="A cozy couch waiting for a visitor" /></div><div className="secret-bottom"><div><p>Oh, you found me! It’s just silly old me here with my silly little cookie, but I have an extra cup if you’d like.</p><a href="https://itch.io/embed-upload/9298162?color=333333" target="_blank" rel="noreferrer" className="inline-link">Maybe I’ll stay a while <Arrow /></a><span className="secret-note">The little interactive experience works best on desktop.</span></div><Link to="/" className="outline-button">← Back to the portfolio</Link></div></div></main>
+  return <main id="main" className="secret-page"><div className="secret-content shell"><span className="tiny-label">YOU FOUND A LITTLE CORNER OF THE INTERNET</span><h1>Welcome to the<br /><em>Couch Zone.</em></h1><div className="secret-photo"><img src={assets.couch} alt="A cozy couch waiting for a visitor" /></div><div className="secret-bottom"><div><p>Oh, you found me! It’s just silly old me here with my silly little cookie, but I have an extra cup if you’d like.</p><a href="https://itch.io/embed-upload/9298162?color=333333" target="_blank" rel="noreferrer" className="inline-link">Maybe I’ll stay a while <Arrow /></a><span className="secret-note">Works best on desktop.</span></div><Link to="/" className="outline-button">← Back to the portfolio</Link></div></div></main>
 }
 
 function Cart() {

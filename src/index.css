@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;500;600;700&display=swap');
 
-:root{font-family:'Titillium Web',Arial,sans-serif;color:#111;background:#fff;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+:root{--olive-leaf:#606c38;--black-forest:#283618;--cornsilk:#fefae0;--sunlit-clay:#dda15e;--copperwood:#bc6c25;--ivory:var(--cornsilk);--ivory-deep:#f4eecb;--ink:var(--black-forest);--cocoa:#1c2610;--accent:var(--copperwood);--accent-dark:#98561a;--amber:var(--sunlit-clay);--olive:var(--olive-leaf);--line:#e6dfb9;--muted:var(--olive-leaf);--muted-2:#4a5a2b;font-family:'Titillium Web',Arial,sans-serif;color:var(--ink);background:var(--ivory);font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;min-width:320px}
@@ -8,6 +8,6 @@ button,a{font:inherit}
 button{cursor:pointer}
 a{color:inherit}
 img{display:block;max-width:100%}
-::selection{background:#111;color:#fff}
-:focus-visible{outline:2px solid #111;outline-offset:4px}
+::selection{background:var(--accent);color:var(--ivory)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
