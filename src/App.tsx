@@ -167,15 +167,133 @@ function PageIntro({ index, label, title, description }: { index: string; label:
 }
 
 function Work() {
-  return <main id="main"><PageIntro index="01" label="PROFESSIONAL WORK" title="Art meets engineering" description="Thoughtful technical solutions for artists, characters, and the worlds they inhabit." /><div className="detail-content shell"><section className="detail-section"><div className="detail-aside"><span className="tiny-label">BLIZZARD ENTERTAINMENT</span><span>2024 — PRESENT</span></div><div className="detail-body"><h2>Pipeline Tech Art</h2><p>Building and supporting tools for artists across the asset creation pipeline. Working with Maya, Houdini, ZBrush, Marmoset Toolbag, Substance Designer, Substance Painter, and Havok.</p><div className="detail-tags"><span>Tool Writing</span><span>Artist Support</span><span>Python</span><span>ZScript</span></div><p className="muted-note">Selected tooling is proprietary. Details available on request.</p></div></section><section className="detail-section"><div className="detail-aside"><span className="tiny-label">BLIZZARD ENTERTAINMENT</span><span>2022 — 2024</span></div><div className="detail-body"><h2>Character Tech Art</h2><p>Rigging, skinning, cloth simulation, and engine integration for Diablo IV hero armor, mounts, and the Spiritborn expansion.</p><Video id="kVJcHH7XdpI" title="2024 Spiritborn Character Tech Art Reel" /><p className="media-caption">Spiritborn hero armor sets · 2024</p></div></section><div className="next-page"><span className="tiny-label">NEXT UP</span><Link to="/projects">Personal projects <Arrow /></Link></div></div></main>
+  return (
+    <main id="main">
+      {/* <PageIntro
+        index="01"
+        label="PROFESSIONAL WORK"
+        title="Art meets engineering"
+        description="Thoughtful technical solutions for artists, characters, and the worlds they inhabit."
+      /> */}
+
+      <div className="detail-content shell">
+        {/* Pipeline Tech Art */}
+        <section className="detail-section">
+          <div className="detail-aside">
+            <span className="tiny-label">BLIZZARD ENTERTAINMENT</span>
+            <span>2024 — PRESENT</span>
+          </div>
+
+          <div className="detail-body">
+            <h2>Pipeline Tech Art</h2>
+            <p>
+              Building and supporting tools for artists across the asset
+              creation pipeline. Working with Maya, Houdini, ZBrush, Marmoset
+              Toolbag, Substance Designer, Substance Painter, and Havok.
+            </p>
+
+            <div className="detail-tags">
+              <span>Tool Writing</span>
+              <span>Artist Support</span>
+              <span>Python</span>
+              {/* <span>ZScript</span> */}
+            </div>
+
+            <p className="muted-note">
+              Selected tooling is proprietary. Details available on request.
+            </p>
+          </div>
+        </section>
+
+        {/* Character Tech Art */}
+        <section className="detail-section">
+          <div className="detail-aside">
+            <span className="tiny-label">BLIZZARD ENTERTAINMENT</span>
+            <span>2022 — 2024</span>
+          </div>
+
+          <div className="detail-body">
+            <h2>Character Tech Art</h2>
+            <p>
+              Rigging, skinning, cloth simulation, and engine integration for
+              Diablo IV hero armor, mounts, and the Spiritborn expansion.
+            </p>
+
+            <Video
+              id="kVJcHH7XdpI"
+              title="2024 Spiritborn Character Tech Art Reel"
+            />
+            <p className="media-caption">Spiritborn hero armor sets · 2024</p>
+          </div>
+        </section>
+
+        <div className="next-page">
+          <span className="tiny-label">NEXT UP</span>
+          <Link to="/projects">
+            Personal projects <Arrow />
+          </Link>
+        </div>
+      </div>
+    </main>
+  )
 }
 
 function Projects() {
-  return <main id="main"><PageIntro index="02" label="PERSONAL PROJECTS" title="Made out of curiosity" description="Side projects, experiments, and collaborations beyond the day-to-day." /><div className="detail-content shell"><section className="project-entry"><div className="project-entry-image"><img src={assets.eden} alt="Eden Project game environment" /><img src={assets.edenDetail} alt="Another scene from the Eden Project" loading="lazy" /></div><div className="project-entry-info"><span className="tiny-label">01 / UNITY · C#</span><h2>Eden Project</h2><p>A light horror interactive narrative made in collaboration with Allison Zheng. I handled all scripting, built a custom framework for dialogue and actions from text files, and integrated art assets.</p><a className="inline-link" href="https://rowlets.itch.io/eden-project-wip" target="_blank" rel="noreferrer">View project <Arrow /></a></div></section><section className="project-entry project-entry-alt"><div className="project-entry-image single-image"><img src={assets.cyberpunk} alt="Cyberpunk 2077 in-game character screenshot from a modding project" loading="lazy" /></div><div className="project-entry-info"><span className="tiny-label">02 / MODDING · WOLVENKIT</span><h2>Cyberpunk 2077 Modding</h2><p>A playful experiment in game modding: custom player tattoos and a very specific new soundtrack for the in-game radio.</p><span className="project-note">Personal experiment · WolvenKit</span></div></section><section className="detail-section rigging-section"><div className="detail-aside"><span className="tiny-label">03 / RIGGING</span><span>MAYA · UE4</span></div><div className="detail-body"><h2>Orc Rig</h2><p>Rigged and imported an orc character into Unreal Engine 4 as an independent character rigging study.</p><Video id="Tl8ELiFamaE" title="Orc Rig Reel" /></div></section><div className="next-page"><span className="tiny-label">NEXT UP</span><Link to="/about">A little about me <Arrow /></Link></div></div></main>
+  return <main id="main">
+    {/* <PageIntro index="02" label="PERSONAL PROJECTS" title="Made out of curiosity" description="Side projects, experiments, and collaborations beyond the day-to-day." /> */}
+    <div className="detail-content shell"><section className="project-entry"><div className="project-entry-image"><img src={assets.eden} alt="Eden Project game environment" /><img src={assets.edenDetail} alt="Another scene from the Eden Project" loading="lazy" /></div><div className="project-entry-info"><span className="tiny-label">01 / UNITY · C#</span><h2>Eden Project</h2><p>A light horror interactive narrative made in collaboration with Allison Zheng. I handled all scripting, built a custom framework for dialogue and actions from text files, and integrated art assets.</p><a className="inline-link" href="https://rowlets.itch.io/eden-project-wip" target="_blank" rel="noreferrer">View project <Arrow /></a></div></section><section className="project-entry project-entry-alt"><div className="project-entry-image single-image"><img src={assets.cyberpunk} alt="Cyberpunk 2077 in-game character screenshot from a modding project" loading="lazy" /></div><div className="project-entry-info"><span className="tiny-label">02 / MODDING · WOLVENKIT</span><h2>Cyberpunk 2077 Modding</h2><p>A playful experiment in game modding: custom player tattoos and a very specific new soundtrack for the in-game radio.</p><span className="project-note">Personal experiment · WolvenKit</span></div></section><section className="detail-section rigging-section"><div className="detail-aside"><span className="tiny-label">03 / RIGGING</span><span>MAYA · UE4</span></div><div className="detail-body"><h2>Orc Rig</h2><p>Rigged and imported an orc character into Unreal Engine 4 as an independent character rigging study.</p><Video id="Tl8ELiFamaE" title="Orc Rig Reel" /></div></section><div className="next-page"><span className="tiny-label">NEXT UP</span><Link to="/about">A little about me <Arrow /></Link></div></div></main>
 }
 
 function About() {
-  return <main id="main"><PageIntro index="03" label="ABOUT" title="Hello, I’m Sharon" description="I like the place where creative problem-solving and technical craft overlap." /><div className="about-content shell"><div className="about-statement"><span className="tiny-label">A BIT ABOUT ME</span><p>I'm a Pipeline Tech Artist at Blizzard Entertainment, supporting artists and building tools for the asset creation pipeline.</p></div><div className="about-copy"><p>I started out studying Data Science and Computer Science at UC Berkeley, found my way into character rigging, and spent a few years as a Character Tech Artist before moving into pipeline work. It’s been a winding road — and one I’m glad to be on.</p><p>Outside of work, I like helping friends make games in Unity, exploring goofy side projects, and spending time with my dog, Kaya.</p><div className="about-actions"><a href="mailto:zhongxsharon@gmail.com" className="pill-button">Get in touch <Arrow /></a><a href={resumeUrl} className="outline-button" target="_blank" rel="noreferrer">View résumé <Arrow /></a></div></div></div></main>
+  return (
+    <main id="main">
+      {/* <PageIntro
+        index="03"
+        label="ABOUT"
+        title="wave boi emote"
+        description="I like the place where creative problem-solving and technical craft overlap."
+      /> */}
+
+      <div className="about-content shell">
+        {/* Left column: statement */}
+        <div className="about-statement">
+          <span className="tiny-label">wave boi emote</span>
+          <p>
+            Hi! I'm Sharon, I'm a Pipeline Tech Artist at Blizzard Entertainment, supporting
+            artists and building tools for the asset creation pipeline.
+          </p>
+        </div>
+
+        {/* Right column: story + links */}
+        <div className="about-copy">
+          <p>
+            I started out studying Data Science and Computer Science at UC
+            Berkeley, found my way into character rigging, and spent a few
+            years as a Character Tech Artist before moving onto the pipeline team.
+          </p>
+
+          <p>
+            Outside of work, I like helping friends make games in Unity,
+            exploring goofy side projects, and spending time with my dog, Kaya.
+          </p>
+
+          <div className="about-actions">
+            <a href="mailto:zhongxsharon@gmail.com" className="pill-button">
+              Get in touch <Arrow />
+            </a>
+            <a
+              href={resumeUrl}
+              className="outline-button"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View résumé <Arrow />
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  )
 }
 
 function Secret() {
