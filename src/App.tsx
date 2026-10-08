@@ -82,7 +82,7 @@ function Footer() {
           <a href={resumeUrl} target="_blank" rel="noreferrer">Résumé <Arrow /></a>
         </div>
       </div>
-      <div className="footer-bottom"><span>© {copyrightYear} Sharon Zhong</span><span>Made with care, and a little curiosity.</span><Link to="/">Back to top ↑</Link></div>
+      <div className="footer-bottom"><span>© {copyrightYear} Sharon Zhong</span><span>you've reached the bottom of the page silly, go back up</span><Link to="/">Back to top ↑</Link></div>
     </footer>
   )
 }
@@ -126,13 +126,6 @@ const programs = [
 function Home() {
   return (
     <main id="main">
-      {/* <section className="intro shell">
-        <div className="eyebrow"><span className="eyebrow-line" /> PORTFOLIO / 2026</div>
-        <div className="intro-grid">
-          <h1>Crafting the space<br />between <em>art</em> &amp; <em>code.</em></h1>
-          <div className="intro-side"><span className="tiny-label">HELLO, I'M SHARON.</span><p>Pipeline &amp; character tech artist making thoughtful tools and bringing digital worlds to life.</p><span className="intro-scroll">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></span></div>
-        </div>
-      </section> */}
 
       <section className="reel-section shell" aria-labelledby="reel-heading">
         <div className="section-kicker"><span>01 / FEATURED REEL</span><span>CHARACTER TECH ART</span></div>
@@ -162,19 +155,9 @@ function Home() {
   )
 }
 
-// function PageIntro({ index, label, title, description }: { index: string; label: string; title: string; description: string }) {
-//   return <div className="page-intro shell"><span className="tiny-label">{index} / {label}</span><h1>{title}<span className="period">.</span></h1><p>{description}</p></div>
-// }
-
 function Work() {
   return (
     <main id="main">
-      {/* <PageIntro
-        index="01"
-        label="PROFESSIONAL WORK"
-        title="Art meets engineering"
-        description="Thoughtful technical solutions for artists, characters, and the worlds they inhabit."
-      /> */}
 
       <div className="detail-content shell">
         {/* Pipeline Tech Art */}
@@ -248,12 +231,6 @@ function Projects() {
 function About() {
   return (
     <main id="main">
-      {/* <PageIntro
-        index="03"
-        label="ABOUT"
-        title="wave boi emote"
-        description="I like the place where creative problem-solving and technical craft overlap."
-      /> */}
 
       <div className="about-content shell">
         {/* Left column: statement */}

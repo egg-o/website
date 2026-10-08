@@ -1,5 +1,7 @@
 # Sharon Zhong — Portfolio
 
+link: https://egg-o.github.io/website/
+
 A minimalist portfolio for Sharon Zhong, built with React, TypeScript, Vite, and React Router. The design uses Titillium Web, a white and black palette, editorial spacing, and original portfolio media.
 
 ## Getting started
