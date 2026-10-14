@@ -40,6 +40,14 @@ function Arrow() {
   return <span aria-hidden="true" className="arrow">↗</span>
 }
 
+function CircleArrow() {
+  return (
+    <span aria-hidden="true" className="circle-btn">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 5l7 7-7 7" /></svg>
+    </span>
+  )
+}
+
 function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => { window.scrollTo(0, 0) }, [pathname])
@@ -73,16 +81,18 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="site-footer shell">
-      <div className="footer-top">
-        <p><a href="mailto:zhongxsharon@gmail.com">:email emoji:<Arrow /></a></p>
-        <div className="footer-links">
-          <a href="https://www.linkedin.com/in/sharonxzhong/" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a>
-          <a href="mailto:zhongxsharon@gmail.com">Email <Arrow /></a>
-          <a href={resumeUrl} target="_blank" rel="noreferrer">Résumé <Arrow /></a>
+    <footer className="site-footer">
+      <div className="shell">
+        <div className="footer-top">
+          <p>this is the footer</p>
+          <div className="footer-links">
+            <a className="footer-pill footer-pill-main" href="mailto:zhongxsharon@gmail.com">:email emoji:</a>
+            <a className="footer-pill" href="https://www.linkedin.com/in/sharonxzhong/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a className="footer-pill" href={resumeUrl} target="_blank" rel="noreferrer">Résumé</a>
+          </div>
         </div>
+        <div className="footer-bottom"><span>© {copyrightYear} Sharon Zhong</span><span>you've reached the bottom of the page silly, go back up</span><Link to="/">Back to top ↑</Link></div>
       </div>
-      <div className="footer-bottom"><span>© {copyrightYear} Sharon Zhong</span><span>you've reached the bottom of the page silly, go back up</span><Link to="/">Back to top ↑</Link></div>
     </footer>
   )
 }
@@ -131,7 +141,7 @@ function Home() {
         <div className="section-kicker"><span>01 / FEATURED REEL</span><span>CHARACTER TECH ART</span></div>
         <Video id="kVJcHH7XdpI" title="Sharon Zhong 2024 Spiritborn Tech Art Reel" className="hero-video" />
         <div className="reel-info"><div><h2 id="reel-heading">2024 Character Tech Art Reel</h2><p>Diablo IV · Vessel of Hatred</p></div><p className="reel-description">Spiritborn hero armor sets — skinning, cloth simulation, and implementing assets in-engine.</p><a href="https://www.youtube.com/watch?v=kVJcHH7XdpI" target="_blank" rel="noreferrer" className="inline-link">Watch on YouTube <Arrow /></a></div>
-        <div className="quick-actions" aria-label="Explore portfolio"><Link to="/tech-art" className="pill-button">Professional Work <Arrow /></Link><Link to="/projects" className="outline-button">Personal Projects <Arrow /></Link><a href={resumeUrl} target="_blank" rel="noreferrer" className="outline-button">View Résumé <Arrow /></a></div>
+        <div className="quick-actions" aria-label="Explore portfolio"><Link to="/tech-art" className="pill-button">Professional Work <Arrow /></Link><Link to="/projects" className="outline-button">Personal Projects <Arrow /></Link><a href={resumeUrl} target="_blank" rel="noreferrer" className="outline-button">View Resume<Arrow /></a></div>
       </section>
 {/* 
       <section className="selected-section shell" aria-labelledby="selected-heading">
@@ -142,13 +152,13 @@ function Home() {
         </div>
       </section> */}
 
-      <section className="tools-section shell" aria-labelledby="tools-heading"><div className="tools-intro"><span className="tiny-label">EXPERIENCE</span><h2 id="tools-heading">Programs &amp; Technologies<br /> Worked With</h2><p>Tools I've interacted with in the industry and for personal projects</p></div>
+      <section className="tools-section shell" aria-labelledby="tools-heading"><div className="tools-intro"><span className="tiny-label">EXPERIENCE</span><h2 id="tools-heading">Programs &amp; Technologies</h2><p>Tools I've interacted with in the industry and for personal projects</p></div>
         <div className="tool-list">{programs.map((program) => <div className="tool-item" key={program.name}><img src={program.image} alt="" loading="lazy" /><span>{program.name}</span></div>)}
         <div className="tool-item tool-text"><span className="tool-monogram">Py</span><span>Python</span></div>
         <div className="tool-item tool-text"><span className="tool-monogram">C#</span><span>Unity / C#</span></div></div>
       </section>
 
-      <section className="explore-section shell" aria-labelledby="explore-heading"><div className="section-heading"></div><div className="explore-links"><Link to="/tech-art"><span className="explore-number">01</span><span>Professional Work</span><Arrow /></Link><Link to="/projects"><span className="explore-number">02</span><span>Personal Projects</span><Arrow /></Link><a href={resumeUrl} target="_blank" rel="noreferrer"><span className="explore-number">03</span><span>View Résumé</span><Arrow /></a></div></section>
+      <section className="explore-section shell" aria-labelledby="explore-heading"><div className="section-heading"></div><div className="explore-links"><Link to="/tech-art"><span className="explore-number">01</span><span>Professional Work</span><CircleArrow /></Link><Link to="/projects"><span className="explore-number">02</span><span>Personal Projects</span><CircleArrow /></Link><a href={resumeUrl} target="_blank" rel="noreferrer"><span className="explore-number">03</span><span>View Resume</span><CircleArrow /></a></div></section>
 
       {/* <section className="couch-section shell"><div><span className="tiny-label">ONE MORE THING</span><p>Not everything has to be<br />so serious.</p><Link to="/secret-3" className="inline-link">Please, take a seat <Arrow /></Link></div><Link to="/secret-3" className="couch-image" aria-label="Find the hidden couch page"><img src={assets.couch} alt="An inviting couch — click to discover a little secret" loading="lazy" /></Link></section> */}
     </main>
@@ -213,7 +223,7 @@ function Work() {
         <div className="next-page">
           <span className="tiny-label">NEXT UP</span>
           <Link to="/projects">
-            Personal projects <Arrow />
+            Personal projects <CircleArrow />
           </Link>
         </div>
       </div>
@@ -224,7 +234,7 @@ function Work() {
 function Projects() {
   return <main id="main">
     {/* <PageIntro index="02" label="PERSONAL PROJECTS" title="Made out of curiosity" description="Side projects, experiments, and collaborations beyond the day-to-day." /> */}
-    <div className="detail-content shell"><section className="project-entry"><div className="project-entry-image"><img src={assets.eden} alt="Eden Project game environment" /><img src={assets.edenDetail} alt="Another scene from the Eden Project" loading="lazy" /></div><div className="project-entry-info"><span className="tiny-label">01 / UNITY · C#</span><h2>Eden Project</h2><p>A light horror interactive narrative made in collaboration with Allison Zheng. I handled all scripting, built a custom framework for dialogue and actions from text files, and integrated art assets.</p><a className="inline-link" href="https://rowlets.itch.io/eden-project-wip" target="_blank" rel="noreferrer">View project <Arrow /></a></div></section><section className="project-entry project-entry-alt"><div className="project-entry-image single-image"><img src={assets.cyberpunk} alt="Cyberpunk 2077 in-game character screenshot from a modding project" loading="lazy" /></div><div className="project-entry-info"><span className="tiny-label">02 / MODDING · WOLVENKIT</span><h2>Cyberpunk 2077 Modding</h2><p>A playful experiment in game modding: custom player tattoos and a very specific new soundtrack for the in-game radio.</p><span className="project-note">Personal experiment · WolvenKit</span></div></section><section className="detail-section rigging-section"><div className="detail-aside"><span className="tiny-label">03 / RIGGING</span><span>MAYA · UE4</span></div><div className="detail-body"><h2>Orc Rig</h2><p>Rigged and imported an orc character into Unreal Engine 4 as an independent character rigging study.</p><Video id="Tl8ELiFamaE" title="Orc Rig Reel" /></div></section><div className="next-page"><span className="tiny-label">NEXT UP</span><Link to="/about">A little about me <Arrow /></Link></div></div></main>
+    <div className="detail-content shell"><section className="project-entry"><div className="project-entry-image"><img src={assets.eden} alt="Eden Project game environment" /><img src={assets.edenDetail} alt="Another scene from the Eden Project" loading="lazy" /></div><div className="project-entry-info"><span className="tiny-label">01 / UNITY · C#</span><h2>Eden Project</h2><p>A light horror interactive narrative made in collaboration with Allison Zheng. I handled all scripting, built a custom framework for dialogue and actions from text files, and integrated art assets.</p><a className="inline-link" href="https://rowlets.itch.io/eden-project-wip" target="_blank" rel="noreferrer">View project <Arrow /></a></div></section><section className="project-entry project-entry-alt"><div className="project-entry-image single-image"><img src={assets.cyberpunk} alt="Cyberpunk 2077 in-game character screenshot from a modding project" loading="lazy" /></div><div className="project-entry-info"><span className="tiny-label">02 / MODDING · WOLVENKIT</span><h2>Cyberpunk 2077 Modding</h2><p>A playful experiment in game modding: custom player tattoos and a very specific new soundtrack for the in-game radio.</p><span className="project-note">Personal experiment · WolvenKit</span></div></section><section className="detail-section rigging-section"><div className="detail-aside"><span className="tiny-label">03 / RIGGING</span><span>MAYA · UE4</span></div><div className="detail-body"><h2>Orc Rig</h2><p>Rigged and imported an orc character into Unreal Engine 4 as an independent character rigging study.</p><Video id="Tl8ELiFamaE" title="Orc Rig Reel" /></div></section><div className="next-page"><span className="tiny-label">NEXT UP</span><Link to="/about">A little about me <CircleArrow /></Link></div></div></main>
 }
 
 // needs a picture of Kaya, needs a picture of me, and a kaya page
@@ -265,7 +275,7 @@ function About() {
               target="_blank"
               rel="noreferrer"
             >
-              View résumé <Arrow />
+              View Resume <Arrow />
             </a>
           </div>
         </div>
