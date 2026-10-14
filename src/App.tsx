@@ -31,7 +31,7 @@ const assets = {
   shotgrid: icons.shotgrid,
   usd: icons.usd,
 }
-const resumeUrl = 'https://www.sharonzhong.com/s/2025-Tech-Art-Resume-Sharon-Zhong.pdf'
+const resumeUrl = `${import.meta.env.BASE_URL}resume.docx`
 const copyrightYear = new Date().getFullYear()
 
 import brandMark from './assets/icons/brand.webp'

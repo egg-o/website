@@ -19,7 +19,7 @@ In PowerShell environments where running `.ps1` files is restricted, use `npm.cm
 - `/secret-3` — the Couch Zone.
 - `/cart` — small empty-cart page matching the header link.
 
-The video reel loads on click. Project photos and tool marks are served from Sharon's existing Squarespace media library; video thumbnails are served from YouTube, and the résumé points to the existing PDF on sharonzhong.com. These external assets require internet access. Replace these URLs with hosted local assets if deploying independently from the original portfolio or if their source locations change.
+The video reel loads on click. Project photos and tool marks are served from Sharon's existing Squarespace media library; video thumbnails are served from YouTube. The résumé is hosted locally at `public/resume.docx` and is deployed with the site. These external assets require internet access.
 
 ## Publish on GitHub Pages
 
