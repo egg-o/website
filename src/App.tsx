@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { HashRouter, Link, NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import './App.css'
 
@@ -35,6 +35,32 @@ const resumeUrl = `${import.meta.env.BASE_URL}resume.pdf`
 const copyrightYear = new Date().getFullYear()
 
 import brandMark from './assets/icons/brand.webp'
+import sharonDisneyPhoto from './assets/photos/sharon_disney.jpg'
+import sharonHikingPhoto from './assets/photos/sharon_hiking.jpeg'
+import sharonPokemonPhoto from './assets/photos/sharon_pokemon.jpeg'
+import sharonSkiingPhoto from './assets/photos/sharon_skiing.jpg'
+
+const kayaPhotos = Object.entries(import.meta.glob(
+  './assets/kaya/*.{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP,avif,AVIF,gif,GIF}',
+  { eager: true, import: 'default' },
+) as Record<string, string>)
+  .sort(([first], [second]) => first.localeCompare(second))
+  .map(([path, src]) => ({
+    src,
+    name: path.split('/').pop()!.replace(/\.\w+$/, '').replace(/[-_]+/g, ' '),
+  }))
+
+function createSeededRandom(seedText: string) {
+  let seed = 0
+  for (const character of seedText) {
+    seed = (seed * 31 + character.charCodeAt(0)) >>> 0
+  }
+
+  return () => {
+    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0
+    return seed / 4294967296
+  }
+}
 
 function Arrow() {
   return <span aria-hidden="true" className="arrow">↗</span>
@@ -84,7 +110,7 @@ function Footer() {
     <footer className="site-footer">
       <div className="shell">
         <div className="footer-top">
-          <p>this is the footer</p>
+          <p>boo! 🎃</p>
           <div className="footer-links">
             <a className="footer-pill footer-pill-main" href="mailto:zhongxsharon@gmail.com">:email emoji:</a>
             <a className="footer-pill" href="https://www.linkedin.com/in/sharonxzhong/" target="_blank" rel="noreferrer">LinkedIn</a>
@@ -181,7 +207,8 @@ function Work() {
             <h2>Pipeline Tech Art</h2>
             <p>
               Building and supporting tools for artists across the asset
-              creation pipeline. Working with Maya, Houdini, ZBrush, Marmoset
+              creation pipeline. 
+              Working with Maya, Houdini, ZBrush, Marmoset
               Toolbag, Substance Designer, Substance Painter, and Havok.
             </p>
 
@@ -189,11 +216,11 @@ function Work() {
               <span>Tool Writing</span>
               <span>Artist Support</span>
               <span>Python</span>
-              {/* <span>ZScript</span> */}
+              <span>C#</span>
             </div>
 
             <p className="muted-note">
-              Selected tooling is proprietary. Details available on request.
+              Code is proprietary. Details available on request.
             </p>
           </div>
         </section>
@@ -232,12 +259,83 @@ function Work() {
 }
 
 function Projects() {
-  return <main id="main">
-    {/* <PageIntro index="02" label="PERSONAL PROJECTS" title="Made out of curiosity" description="Side projects, experiments, and collaborations beyond the day-to-day." /> */}
-    <div className="detail-content shell"><section className="project-entry"><div className="project-entry-image"><img src={assets.eden} alt="Eden Project game environment" /><img src={assets.edenDetail} alt="Another scene from the Eden Project" loading="lazy" /></div><div className="project-entry-info"><span className="tiny-label">01 / UNITY · C#</span><h2>Eden Project</h2><p>A light horror interactive narrative made in collaboration with Allison Zheng. I handled all scripting, built a custom framework for dialogue and actions from text files, and integrated art assets.</p><a className="inline-link" href="https://rowlets.itch.io/eden-project-wip" target="_blank" rel="noreferrer">View project <Arrow /></a></div></section><section className="project-entry project-entry-alt"><div className="project-entry-image single-image"><img src={assets.cyberpunk} alt="Cyberpunk 2077 in-game character screenshot from a modding project" loading="lazy" /></div><div className="project-entry-info"><span className="tiny-label">02 / MODDING · WOLVENKIT</span><h2>Cyberpunk 2077 Modding</h2><p>A playful experiment in game modding: custom player tattoos and a very specific new soundtrack for the in-game radio.</p><span className="project-note">Personal experiment · WolvenKit</span></div></section><section className="detail-section rigging-section"><div className="detail-aside"><span className="tiny-label">03 / RIGGING</span><span>MAYA · UE4</span></div><div className="detail-body"><h2>Orc Rig</h2><p>Rigged and imported an orc character into Unreal Engine 4 as an independent character rigging study.</p><Video id="Tl8ELiFamaE" title="Orc Rig Reel" /></div></section><div className="next-page"><span className="tiny-label">NEXT UP</span><Link to="/about">A little about me <CircleArrow /></Link></div></div></main>
+  return (
+    <main id="main">
+      <div className="detail-content shell">
+        <section className="project-entry">
+          <div className="project-entry-image">
+            <img src={assets.eden} alt="Eden Project game environment" />
+            <img
+              src={assets.edenDetail}
+              alt="Another scene from the Eden Project"
+              loading="lazy"
+            />
+          </div>
+          <div className="project-entry-info">
+            <span className="tiny-label">01 / UNITY · C#</span>
+            <h2>Eden Project</h2>
+            <p>
+              A light horror interactive narrative made in collaboration with
+              Allison Zheng. I handled all scripting, built a custom framework
+              for dialogue and actions from text files, and integrated art
+              assets.
+            </p>
+            <a
+              className="inline-link"
+              href="https://rowlets.itch.io/eden-project-wip"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View project <Arrow />
+            </a>
+          </div>
+        </section>
+
+        <section className="project-entry project-entry-alt">
+          <div className="project-entry-image single-image">
+            <img
+              src={assets.cyberpunk}
+              alt="Cyberpunk 2077 in-game character screenshot from a modding project"
+              loading="lazy"
+            />
+          </div>
+          <div className="project-entry-info">
+            <span className="tiny-label">02 / MODDING · WOLVENKIT</span>
+            <h2>Cyberpunk 2077 Modding</h2>
+            <p>
+              An experiment in game modding: custom player tattoos and a
+              very specific new soundtrack for the in-game radio.
+            </p>
+            <span className="project-note">Personal experiment · WolvenKit</span>
+          </div>
+        </section>
+
+        <section className="detail-section rigging-section">
+          <div className="detail-aside">
+            <span className="tiny-label">03 / RIGGING</span>
+            <span>MAYA · UE4</span>
+          </div>
+          <div className="detail-body">
+            <h2>Orc Rig</h2>
+            <p>
+              Rigged and imported an orc character into Unreal Engine 4 as an
+              independent character rigging study.
+            </p>
+            <Video id="Tl8ELiFamaE" title="Orc Rig Reel" />
+          </div>
+        </section>
+
+        <div className="next-page">
+          <span className="tiny-label">NEXT UP</span>
+          <Link to="/about">
+            A little about me <CircleArrow />
+          </Link>
+        </div>
+      </div>
+    </main>
+  )
 }
 
-// needs a picture of Kaya, needs a picture of me, and a kaya page
 function About() {
   return (
     <main id="main">
@@ -247,22 +345,23 @@ function About() {
         <div className="about-statement">
           <span className="tiny-label">wave boi emote</span>
           <p>
-            Hi! I'm Sharon, I'm a Pipeline Tech Artist at Blizzard Entertainment, supporting
-            artists and building tools for the asset creation pipeline.
+            Hi! I'm Sharon, I'm a Pipeline Tech Artist at Blizzard Entertainment <br />
+            💙
           </p>
         </div>
 
         {/* Right column: story + links */}
         <div className="about-copy">
           <p>
-            I started out studying Data Science and Computer Science at UC
+            I started out studying <em>Data Science and Computer Science</em> at UC
             Berkeley, found my way into character rigging, and spent a few
-            years as a Character Tech Artist before moving onto the pipeline team.
+            years as a <em>Character Tech Artist</em> before moving onto the Pipeline team.
           </p>
 
           <p>
             Outside of work, I like helping friends make games in Unity,
-            exploring goofy side projects, and spending time with my dog, Kaya.
+            exploring <Link to="/secret-3"><em>goofy side projects</em></Link>,
+            and spending time with my dog, <Link to="/kaya">Kaya</Link>.
           </p>
 
           <div className="about-actions">
@@ -279,13 +378,107 @@ function About() {
             </a>
           </div>
         </div>
+
+        <div className="about-gallery" aria-label="Photos of Sharon">
+          <figure className="about-photo">
+            <img
+              src={sharonPokemonPhoto}
+              alt="Sharon standing in front of a Pokémon card display"
+              loading="lazy"
+            />
+            <figcaption>gotta catch em all!!</figcaption>
+          </figure>
+          <figure className="about-photo">
+            <img
+              src={sharonDisneyPhoto}
+              alt="Sharon hugging Donald Duck"
+              loading="lazy"
+            />
+            <figcaption>quack</figcaption>
+          </figure>
+          <figure className="about-photo">
+            <img
+              src={sharonHikingPhoto}
+              alt="Sharon exploring a forest trail"
+              loading="lazy"
+            />
+            <figcaption>touch grass</figcaption>
+          </figure>
+          <figure className="about-photo">
+            <img
+              src={sharonSkiingPhoto}
+              alt="Sharon on a snowy ski slope"
+              loading="lazy"
+            />
+            <figcaption>✌️</figcaption>
+          </figure>
+        </div>
+      </div>
+    </main>
+  )
+}
+
+function Kaya() {
+  const [landscapePhotos, setLandscapePhotos] = useState<Set<string>>(
+    () => new Set(),
+  )
+  const scatteredPhotos = useMemo(() => {
+    return kayaPhotos.map((photo) => {
+      const random = createSeededRandom(photo.src)
+      return {
+        ...photo,
+        rotation: random() * 3 - 1.5,
+      }
+    })
+  }, [])
+
+  return (
+    <main id="main" className="kaya-page">
+      <div className="kaya-content shell">
+        {scatteredPhotos.length > 0 ? (
+          <div className="kaya-photo-wall">
+            {scatteredPhotos.map((photo, index) => (
+              <figure
+                className={`kaya-polaroid${landscapePhotos.has(photo.src) ? ' kaya-photo-landscape' : ''}`}
+                key={photo.src}
+                style={{
+                  transform: `translateY(${index % 2 === 0 ? 0 : 10}px) rotate(${photo.rotation}deg)`,
+                }}
+              >
+                <img
+                  src={photo.src}
+                  alt={`Kaya — ${photo.name}`}
+                  loading="lazy"
+                  onLoad={(event) => {
+                    const { naturalWidth, naturalHeight } = event.currentTarget
+                    if (naturalWidth <= naturalHeight) return
+
+                    setLandscapePhotos((photos) => {
+                      const nextPhotos = new Set(photos)
+                      nextPhotos.add(photo.src)
+                      return nextPhotos
+                    })
+                  }}
+                />
+              </figure>
+            ))}
+          </div>
+        ) : (
+          <p className="kaya-empty">
+            The photo pile is waiting for Kaya. Add photos to <code>src/assets/kaya</code>
+            and they’ll appear here.
+          </p>
+        )}
+        <Link to="/about" className="outline-button kaya-back-link">
+          ← Go Back
+        </Link>
       </div>
     </main>
   )
 }
 
 function Secret() {
-  return <main id="main" className="secret-page"><div className="secret-content shell"><span className="tiny-label">YOU FOUND A LITTLE CORNER OF THE INTERNET</span><h1>Welcome to the<br /><em>Couch Zone.</em></h1><div className="secret-photo"><img src={assets.couch} alt="A cozy couch waiting for a visitor" /></div><div className="secret-bottom"><div><p>Oh, you found me! It’s just silly old me here with my silly little cookie, but I have an extra cup if you’d like.</p><a href="https://itch.io/embed-upload/9298162?color=333333" target="_blank" rel="noreferrer" className="inline-link">Maybe I’ll stay a while <Arrow /></a><span className="secret-note">Works best on desktop.</span></div><Link to="/" className="outline-button">← Back to the portfolio</Link></div></div></main>
+  return <main id="main" className="secret-page"><div className="secret-content shell"><span className="tiny-label">YOU FOUND A LITTLE CORNER OF THE INTERNET</span><h1>Welcome to the<br /><em>Couch Zone.</em></h1><div className="secret-photo"><img src={assets.couch} alt="A cozy couch waiting for a visitor" /></div><div className="secret-bottom"><div><p>Oh, you found me! It’s just silly old me here with my silly little cookie, but I have an extra cup if you’d like.</p><a href="https://itch.io/embed-upload/9298162?color=333333" target="_blank" rel="noreferrer" className="inline-link">Maybe I’ll stay a while <Arrow /></a><span className="secret-note">Works best on desktop.</span></div><Link to="/" className="outline-button">← Go Back</Link></div></div></main>
 }
 
 function Cart() {
@@ -297,7 +490,7 @@ function NotFound() {
 }
 
 function App() {
-  return <HashRouter><ScrollToTop /><button type="button" onClick={skipToContent} className="skip-link">Skip to content</button><Header /><Routes><Route path="/" element={<Home />} /><Route path="/tech-art" element={<Work />} /><Route path="/projects" element={<Projects />} /><Route path="/about" element={<About />} /><Route path="/secret-3" element={<Secret />} /><Route path="/cart" element={<Cart />} /><Route path="*" element={<NotFound />} /></Routes><Footer /></HashRouter>
+  return <HashRouter><ScrollToTop /><button type="button" onClick={skipToContent} className="skip-link">Skip to content</button><Header /><Routes><Route path="/" element={<Home />} /><Route path="/tech-art" element={<Work />} /><Route path="/projects" element={<Projects />} /><Route path="/about" element={<About />} /><Route path="/kaya" element={<Kaya />} /><Route path="/secret-3" element={<Secret />} /><Route path="/cart" element={<Cart />} /><Route path="*" element={<NotFound />} /></Routes><Footer /></HashRouter>
 }
 
 export default App
