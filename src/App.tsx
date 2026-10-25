@@ -16,7 +16,6 @@ const icons = Object.fromEntries(
 
 const cdn = 'https://images.squarespace-cdn.com/content/v1/64f6359e849597597913ff6f/'
 const assets = {
-  couch: icons.couch,
   eden: `${cdn}7d4db476-0f19-4991-a090-9ae732cecd06/Screenshot+2024-04-29+091904.png?format=1000w`,
   edenDetail: `${cdn}267d1687-74f5-44c2-8c22-8a6da5611f32/edenSS.PNG?format=1000w`,
   cyberpunk: `${cdn}6b9d4e16-024d-4682-8414-1bfc8f673710/photomode_30122023_162637.png?format=1000w`,
@@ -39,6 +38,8 @@ import sharonDisneyPhoto from './assets/photos/sharon_disney.jpg'
 import sharonHikingPhoto from './assets/photos/sharon_hiking.jpeg'
 import sharonPokemonPhoto from './assets/photos/sharon_pokemon.jpeg'
 import sharonSkiingPhoto from './assets/photos/sharon_skiing.jpg'
+import crowdedCouch from './assets/photos/crowded-couch.png'
+import homeCouch from './assets/photos/couch.png'
 
 const kayaPhotos = Object.entries(import.meta.glob(
   './assets/kaya/*.{png,PNG,jpg,JPG,jpeg,JPEG,webp,WEBP,avif,AVIF,gif,GIF}',
@@ -161,7 +162,7 @@ const programs = [
 
 function Home() {
   return (
-    <main id="main">
+    <main id="main" className="home-page">
 
       <section className="reel-section shell" aria-labelledby="reel-heading">
         <div className="section-kicker"><span>01 / FEATURED REEL</span><span>CHARACTER TECH ART</span></div>
@@ -185,6 +186,14 @@ function Home() {
       </section>
 
       <section className="explore-section shell" aria-labelledby="explore-heading"><div className="section-heading"></div><div className="explore-links"><Link to="/tech-art"><span className="explore-number">01</span><span>Professional Work</span><CircleArrow /></Link><Link to="/projects"><span className="explore-number">02</span><span>Personal Projects</span><CircleArrow /></Link><a href={resumeUrl} target="_blank" rel="noreferrer"><span className="explore-number">03</span><span>View Resume</span><CircleArrow /></a></div></section>
+
+      <Link
+        to="/secret-3"
+        className="home-secret-couch"
+        aria-label="Discover the Couch Zone"
+      >
+        <img src={homeCouch} alt="" />
+      </Link>
 
       {/* <section className="couch-section shell"><div><span className="tiny-label">ONE MORE THING</span><p>Not everything has to be<br />so serious.</p><Link to="/secret-3" className="inline-link">Please, take a seat <Arrow /></Link></div><Link to="/secret-3" className="couch-image" aria-label="Find the hidden couch page"><img src={assets.couch} alt="An inviting couch — click to discover a little secret" loading="lazy" /></Link></section> */}
     </main>
@@ -478,7 +487,41 @@ function Kaya() {
 }
 
 function Secret() {
-  return <main id="main" className="secret-page"><div className="secret-content shell"><span className="tiny-label">YOU FOUND A LITTLE CORNER OF THE INTERNET</span><h1>Welcome to the<br /><em>Couch Zone.</em></h1><div className="secret-photo"><img src={assets.couch} alt="A cozy couch waiting for a visitor" /></div><div className="secret-bottom"><div><p>Oh, you found me! It’s just silly old me here with my silly little cookie, but I have an extra cup if you’d like.</p><a href="https://itch.io/embed-upload/9298162?color=333333" target="_blank" rel="noreferrer" className="inline-link">Maybe I’ll stay a while <Arrow /></a><span className="secret-note">Works best on desktop.</span></div><Link to="/" className="outline-button">← Go Back</Link></div></div></main>
+  return (
+    <main id="main" className="secret-page">
+      <div className="secret-content shell">
+        <span className="tiny-label">secret discovered!</span>
+        <h1>
+          Welcome to
+          <br />
+          the <em>Couch Zone.</em>
+        </h1>
+        <div className="secret-photo">
+          <img src={crowdedCouch} alt="A cozy couch with a cat, tea, and cookies" />
+        </div>
+        <div className="secret-bottom">
+          <div>
+            {/* <p>
+              Oh, you found me! It's just silly old me here with my silly little
+              cookie, but I have an extra cup if you'd like.
+            </p> */}
+            <a
+              href="https://itch.io/embed-upload/9298162?color=333333"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-link"
+            >
+              Maybe I’ll stay a while <Arrow />
+            </a>
+            <span className="secret-note">Works best on desktop.</span>
+          </div>
+          <Link to="/" className="outline-button">
+            ← Go Back
+          </Link>
+        </div>
+      </div>
+    </main>
+  )
 }
 
 function Cart() {
